@@ -112,3 +112,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
           tag_name: v${{ env.VERSION }}
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install --no-install-recommends -y \
+        bind9-dnsutils \
+        curl \
+        emacs-nox \
+        git \
+        inetutils-traceroute \
+        iputils-ping \
+        smbclient
