@@ -1,6 +1,6 @@
 ---
 name: Docker Hub
-
+docker pull --platform "${{ matrix.platform }}" "kalilinux/kali-rolling:${{ matrix.tag }}"
 on:
   push:
   schedule:
@@ -18,9 +18,9 @@ jobs:
         platform: ["linux/amd64", "linux/arm64"]
         tag: ["main", "latest"]
     steps:
-      - name: Set IMAGE
+      - name: Pull the ${{ matrix.tag }} ${{ matrix.platform }} image
         shell: bash
-        run: echo "IMAGE=${GITHUB_REPOSITORY#*/docker-}" >> "${GITHUB_ENV}"
+        run: docker pull --platform "${{ matrix.platform }}" "gregusmazi/kali:${{ matrix.tag }}"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Pull the ${{ matrix.tag }} ${{ matrix.platform }} image
         shell: bash
